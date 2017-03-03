@@ -16,10 +16,14 @@ for namef in FileList:
 
 FileList=os.listdir(path='temp')
 listFile=[]
+cadNumber=None
+
 for file_name in FileList:
     if (file_name[-3:])=='xml':
+        print (file_name)
         doc=etree.parse('temp/'+file_name)
         for elem in doc.iter("Cadastral_Block"):
+            print (elem)
             cadNumber=elem.get("CadastralNumber")
         for elem in doc.iter("Date"):
             temp_elem=elem.text
@@ -27,7 +31,7 @@ for file_name in FileList:
             months=temp_elem[5:7]
             day=temp_elem[-2:]
             
-        #print(cadNumber)
+        print(cadNumber)
         file_name_new=cadNumber[0:2]+' '+cadNumber[3:5]+' '+cadNumber[6:]
         file_name_new+=' '+year+'-'+months+'-'+day
         indexFileName=1
